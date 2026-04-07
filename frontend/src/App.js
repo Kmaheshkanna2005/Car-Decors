@@ -9,6 +9,7 @@ import AddPart from "./pages/AddPart";
 import CreateStaff from "./pages/CreateStaff";
 import StaffManagement from "./pages/StaffManagement";
 import EditPart from "./pages/EditPart";
+
 function App() {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
