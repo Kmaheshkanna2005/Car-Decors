@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
+import BASE_URL from "../api";
 const FORM_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -39,7 +39,7 @@ const EditPart = () => {
   const token = localStorage.getItem("token");
 
   const fetchPart = async () => {
-    const res = await axios.get("http://localhost:5000/api/parts", { headers: { Authorization: `Bearer ${token}` } });
+    const res = await axios.get(`${BASE_URL}/api/parts`, { headers: { Authorization: `Bearer ${token}` } });
     const part = res.data.find((p) => p._id === id);
     setName(part.name);
     setCategory(part.category);
@@ -55,7 +55,7 @@ const EditPart = () => {
     formData.append("category", category);
     formData.append("price", price);
     if (image) formData.append("image", image);
-    await axios.put(`http://localhost:5000/api/parts/${id}`, formData, {
+    await axios.put(`${BASE_URL}/api/parts/${id}`, formData, {
       headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" }
     });
     alert("Part updated successfully");
@@ -69,7 +69,7 @@ const EditPart = () => {
   try {
 
     await axios.delete(
-      `http://localhost:5000/api/parts/${id}`,
+      `${BASE_URL}/api/parts/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`

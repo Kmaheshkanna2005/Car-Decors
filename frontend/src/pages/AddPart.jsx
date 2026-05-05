@@ -3,7 +3,7 @@
 // ─────────────────────────────────────────────
 import { useState } from "react";
 import axios from "axios";
-
+import BASE_URL from "../api";
 const FORM_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -47,7 +47,7 @@ const AddPart = () => {
     formData.append("price", price);
     formData.append("image", image);
     try {
-      await axios.post("http://localhost:5000/api/parts", formData, {
+      await axios.post(`${BASE_URL}/api/parts`, formData, {
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" }
       });
       alert("Part added successfully");

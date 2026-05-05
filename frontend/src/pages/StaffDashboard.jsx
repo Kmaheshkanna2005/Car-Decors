@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import BASE_URL from "../api";
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -128,7 +128,7 @@ const StaffDashboard = () => {
   const generateReport = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:5000/api/reports/usage", {
+      const response = await axios.get(`${BASE_URL}/api/reports/usage`, {
         headers: { Authorization: `Bearer ${token}` },
         responseType: "blob",
       });

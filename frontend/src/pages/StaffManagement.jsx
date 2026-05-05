@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import BASE_URL from "../api";
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -42,7 +42,7 @@ const StaffManagement = () => {
 
   const fetchStaff = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/users/staff", { headers: { Authorization: `Bearer ${token}` } });
+      const res = await axios.get(`${BASE_URL}/api/users/staff`, { headers: { Authorization: `Bearer ${token}` } });
       setStaff(res.data);
     } catch { alert("Failed to load staff"); }
   };
@@ -52,7 +52,7 @@ const StaffManagement = () => {
   const deleteStaff = async (id) => {
     if (!window.confirm("Delete this staff member?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/users/staff/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`${BASE_URL}/api/users/staff/${id}`, { headers: { Authorization: `Bearer ${token}` } });
       fetchStaff();
     } catch { alert("Failed to delete staff"); }
   };

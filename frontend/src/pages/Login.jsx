@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-
+import BASE_URL from "../api";
 const Login = () => {
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
@@ -10,7 +10,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", { mobile, password });
+      const res = await axios.post(`${BASE_URL}/api/auth/login`, { mobile, password });
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.role);
       window.location.href = res.data.role === "admin" ? "/admin" : "/staff";

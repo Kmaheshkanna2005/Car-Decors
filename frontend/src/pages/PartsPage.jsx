@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import BASE_URL from "../api";
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -87,7 +87,7 @@ const PartsPage = () => {
 
   const fetchParts = async () => {
     try{
-      const res = await axios.get("http://localhost:5000/api/parts",{
+      const res = await axios.get(`${BASE_URL}/api/parts`,{
         headers:{Authorization:`Bearer ${token}`}
       });
       setParts(res.data);
@@ -107,7 +107,7 @@ const PartsPage = () => {
       const quantity = quantities[id] || 1;
 
       await axios.post(
-        "http://localhost:5000/api/cart/add",
+        `${BASE_URL}/api/cart/add`,
         {partId:id,quantity:Number(quantity)},
         {headers:{Authorization:`Bearer ${token}`}}
       );
@@ -124,7 +124,7 @@ const PartsPage = () => {
 
     try{
       await axios.patch(
-        `http://localhost:5000/api/parts/${id}/increase`,
+        `${BASE_URL}/api/parts/${id}/increase`,
         {quantity:Number(quantity)},
         {headers:{Authorization:`Bearer ${token}`}}
       );
@@ -142,7 +142,7 @@ const PartsPage = () => {
 
     try{
       await axios.patch(
-        `http://localhost:5000/api/parts/${id}/set-stock`,
+        `${BASE_URL}/api/parts/${id}/set-stock`,
         {stock:Number(newStock)},
         {headers:{Authorization:`Bearer ${token}`}}
       );
@@ -206,7 +206,7 @@ const PartsPage = () => {
           <div className="pp-card-img-wrap">
             <img
               className="pp-card-img"
-              src={`http://localhost:5000/${part.image}`}
+              src={`${BASE_URL}/${part.image}`}
               alt={part.name}
             />
           </div>

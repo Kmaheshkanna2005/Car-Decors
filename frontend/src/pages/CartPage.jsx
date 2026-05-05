@@ -3,7 +3,7 @@
 // ─────────────────────────────────────────────
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import BASE_URL from "../api";
 const CART_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -40,7 +40,7 @@ const CartPage = () => {
 
   const fetchCart = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/cart", { headers: { Authorization: `Bearer ${token}` } });
+      const res = await axios.get(`${BASE_URL}/api/cart`, { headers: { Authorization: `Bearer ${token}` } });
       setCart(res.data);
     } catch { alert("Failed to load cart"); }
   };
@@ -49,14 +49,14 @@ const CartPage = () => {
 
   const removeItem = async (partId) => {
     try {
-      await axios.delete("http://localhost:5000/api/cart/remove", { headers: { Authorization: `Bearer ${token}` }, data: { partId } });
+      await axios.delete(`${BASE_URL}/api/cart/remove`, { headers: { Authorization: `Bearer ${token}` }, data: { partId } });
       fetchCart();
     } catch { alert("Failed to remove item"); }
   };
 
   const commitCart = async () => {
     try {
-      await axios.post("http://localhost:5000/api/cart/commit", {}, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.post(`${BASE_URL}/api/cart/commit`, {}, { headers: { Authorization: `Bearer ${token}` } });
       alert("Cart committed successfully");
       fetchCart();
     } catch { alert("Commit failed"); }

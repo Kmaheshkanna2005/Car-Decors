@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import DashboardCharts from "../pages/DashboardCharts";
+import BASE_URL from "../api";
 
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -261,21 +262,21 @@ const AdminDashboard = () => {
 
   const fetchStats = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/dashboard", { headers: { Authorization: `Bearer ${token}` } });
-      setStats(res.data);
+      const res = await axios.get(`${BASE_URL}/api/dashboard`, { headers: { Authorization: `Bearer ${token}` } });
+      setStats(res.data); 
     } catch { alert("Failed to load stats"); }
   };
 
   const fetchParts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/parts", { headers: { Authorization: `Bearer ${token}` } });
+      const res = await axios.get(`${BASE_URL}/api/parts`, { headers: { Authorization: `Bearer ${token}` } });
       setParts(res.data);
     } catch {}
   };
 
   const fetchLowStock = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/parts/low-stock", { headers: { Authorization: `Bearer ${token}` } });
+      const res = await axios.get(`${BASE_URL}/api/parts/low-stock`, { headers: { Authorization: `Bearer ${token}` } });
       setLowStock(res.data);
     } catch {}
   };
@@ -284,7 +285,7 @@ const AdminDashboard = () => {
 
   const generateReport = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/reports/usage", {
+      const response = await axios.get(`${BASE_URL}/api/reports/usage`, {
         headers: { Authorization: `Bearer ${token}` },
         responseType: "blob",
       });

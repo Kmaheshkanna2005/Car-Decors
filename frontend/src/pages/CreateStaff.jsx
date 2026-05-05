@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-
+import BASE_URL from "../api";
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -31,7 +31,7 @@ const CreateStaff = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/users/staff", { name, mobile, password }, {
+      await axios.post(`${BASE_URL}/api/users/staff`, { name, mobile, password }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert("Staff created successfully");
