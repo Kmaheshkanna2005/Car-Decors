@@ -212,7 +212,7 @@ GET /api/reports/history
 
 ## 👨‍💻 Author
 
-**Mahi**
+**Mahesh Kanna**
 Computer Science Engineering Student
 
 ---
