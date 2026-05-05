@@ -96,7 +96,10 @@ const PartsPage = () => {
     }
   };
 
-  useEffect(()=>{fetchParts();},[]);
+// eslint-disable-next-line
+useEffect(() => {
+  fetchParts();
+}, []);
 
   const handleQuantityChange=(id,value)=>{
     setQuantities({...quantities,[id]:value});

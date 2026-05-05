@@ -45,7 +45,10 @@ const UsageHistory = () => {
     } catch { alert("Failed to load history"); }
   };
 
-  useEffect(() => { fetchHistory(); }, []);
+ // eslint-disable-next-line
+useEffect(() => {
+  fetchHistory();
+}, []);
 
   const totalRows = history.reduce((sum, r) => sum + r.partsUsed.length, 0);
 

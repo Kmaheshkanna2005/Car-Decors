@@ -47,7 +47,10 @@ const StaffManagement = () => {
     } catch { alert("Failed to load staff"); }
   };
 
-  useEffect(() => { fetchStaff(); }, []);
+// eslint-disable-next-line
+useEffect(() => {
+  fetchStaff();
+}, []);
 
   const deleteStaff = async (id) => {
     if (!window.confirm("Delete this staff member?")) return;

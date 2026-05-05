@@ -44,8 +44,10 @@ const CartPage = () => {
       setCart(res.data);
     } catch { alert("Failed to load cart"); }
   };
-
-  useEffect(() => { fetchCart(); }, []);
+// eslint-disable-next-line
+useEffect(() => {
+  fetchCart();
+}, []);
 
   const removeItem = async (partId) => {
     try {
